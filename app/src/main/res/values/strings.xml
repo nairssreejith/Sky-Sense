@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Sky Sense</string>
+    <string name="title_activity_weather_app_main">WeatherAppMainActivity</string>
 </resources>
