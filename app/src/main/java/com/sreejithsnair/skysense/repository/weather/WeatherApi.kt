@@ -1,6 +1,6 @@
-package com.sreejithsnair.skysense.repository
+package com.sreejithsnair.skysense.repository.weather
 
-import com.sreejithsnair.skysense.model.WeatherModel
+import com.sreejithsnair.skysense.data.WeatherModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

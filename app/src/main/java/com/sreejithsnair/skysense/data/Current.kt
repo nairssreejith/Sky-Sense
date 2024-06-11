@@ -1,4 +1,4 @@
-package com.sreejithsnair.skysense.model
+package com.sreejithsnair.skysense.data
 
 data class Current(
     val cloud: String,

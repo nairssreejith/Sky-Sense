@@ -1,4 +1,4 @@
-package com.sreejithsnair.skysense.repository
+package com.sreejithsnair.skysense.repository.weather
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

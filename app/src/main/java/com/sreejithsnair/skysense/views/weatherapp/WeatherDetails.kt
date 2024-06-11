@@ -53,8 +53,8 @@ import com.sreejithsnair.skysense.utilities.Constants.titlePressure
 import com.sreejithsnair.skysense.utilities.Constants.titleUv
 import com.sreejithsnair.skysense.utilities.Constants.titleVisibility
 import com.sreejithsnair.skysense.utilities.Constants.titleWind
-import com.sreejithsnair.skysense.utilities.Constants.weatherAppCardBackground
-import com.sreejithsnair.skysense.model.WeatherModel
+import com.sreejithsnair.skysense.utilities.Constants.cardTranslucentBackground
+import com.sreejithsnair.skysense.data.WeatherModel
 
 @Composable
 fun WeatherDetails(data: WeatherModel){
@@ -233,7 +233,7 @@ fun WeatherComponentDetailRightCard(drawableId: Int, title: String, value: Strin
 @Composable
 fun WeatherDetailsCardContent(drawableId: Int, title: String, value: String?){
 
-    val backgroundPainter: Painter = painterResource(weatherAppCardBackground)
+    val backgroundPainter: Painter = painterResource(cardTranslucentBackground)
 
     Box{
         Image(

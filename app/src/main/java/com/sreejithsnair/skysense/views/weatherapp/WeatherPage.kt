@@ -60,113 +60,100 @@ fun WeatherPage(viewModel: WeatherViewModel){
 
     val keyBoardController = LocalSoftwareKeyboardController.current
     val backgroundImage = painterResource(id = R.drawable.weather_app_bg)
-    var weatherAppTitle = stringResource(id = R.string.weather_app_title)
-    var weatherAppDescription = stringResource(id = R.string.weather_app_content_description)
-
-    // Encrypt API Key
+    val weatherAppTitle = stringResource(id = R.string.weather_app_title)
+    val weatherAppDescription = stringResource(id = R.string.weather_app_content_description)
 
 
-
-    Box(modifier = Modifier
-        .fillMaxSize()
-    ){
-        Image(painter = backgroundImage,
-            contentDescription = "background image",
-            contentScale = ContentScale.FillBounds,
-            modifier = Modifier.fillMaxSize()
-        )
-
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Spacer(modifier = Modifier.height(8.dp))
+        Card(
+            colors = CardDefaults.cardColors(
+                containerColor = MaterialTheme.colorScheme.primary
+            ),
+            modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
         ) {
-            Spacer(modifier = Modifier.height(8.dp))
-            Card(
-                colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.primary
-                ),
-                modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
+            GenericCardContent(weatherAppTitle, weatherAppDescription)
+        }
+
+        Column (
+            modifier = Modifier
+                .wrapContentHeight()
+                .verticalScroll(scrollState)
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ){
+            Spacer(modifier = Modifier.height(10.dp))
+
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                GenericCardContent(weatherAppTitle, weatherAppDescription)
+                OutlinedTextField(
+                    modifier = Modifier
+                        .weight(1f),
+                    value = city,
+                    onValueChange = {
+                        city = it
+                    },
+                    colors = androidx.compose.material3.OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color.White,
+                        unfocusedBorderColor = Color(0xFFDDDDDD)
+                    ),
+                    textStyle = TextStyle(
+                        fontFamily = Constants.customFontFamily,
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.Normal,
+                        color = Color.White
+                    ),
+                    label = {
+                        Text(
+                            text = "Search for any location",
+                            fontFamily = Constants.customFontFamily,
+                            color = Color(0xFFDDDDDD)
+                        )
+                    },
+                    keyboardOptions = KeyboardOptions(
+                        capitalization = KeyboardCapitalization.Sentences,
+                        keyboardType = KeyboardType.Text,
+                        imeAction = ImeAction.Search
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onSearch = {
+                            viewModel.getWeatherData(city)
+                            city = ""
+                            keyBoardController?.hide()
+                        }
+                    )
+                )
             }
 
-            Column (
-                modifier = Modifier
-                    .wrapContentHeight()
-                    .verticalScroll(scrollState)
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ){
-                Spacer(modifier = Modifier.height(10.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceEvenly
-                ) {
-                    OutlinedTextField(
-                        modifier = Modifier
-                            .weight(1f),
-                        value = city,
-                        onValueChange = {
-                            city = it
-                        },
-                        colors = androidx.compose.material3.OutlinedTextFieldDefaults.colors(
-                            focusedBorderColor = Color.White,
-                            unfocusedBorderColor = Color(0xFFDDDDDD)
-                        ),
-                        textStyle = TextStyle(
-                            fontFamily = Constants.customFontFamily,
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Normal,
-                            color = Color.White
-                        ),
-                        label = {
-                            Text(
-                                text = "Search for any location",
-                                fontFamily = Constants.customFontFamily,
-                                color = Color(0xFFDDDDDD)
-                            )
-                        },
-                        keyboardOptions = KeyboardOptions(
-                            capitalization = KeyboardCapitalization.Sentences,
-                            keyboardType = KeyboardType.Text,
-                            imeAction = ImeAction.Search
-                        ),
-                        keyboardActions = KeyboardActions(
-                            onSearch = {
-                                viewModel.getWeatherData(city)
-                                keyBoardController?.hide()
-                            }
+            when(val result = weatherResult.value){
+                is NetworkResponse.Success -> {
+                    WeatherDetails(data = result.data)
+                }
+                is NetworkResponse.Error -> {
+                    Text(text = result.errorMessage,
+                        style = TextStyle(
+                            color = Color.Red,
+                            fontSize = 18.sp
                         )
                     )
                 }
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-                when(val result = weatherResult.value){
-                    is NetworkResponse.Success -> {
-                        WeatherDetails(data = result.data)
-                    }
-                    is NetworkResponse.Error -> {
-                        Text(text = result.errorMessage,
-                            style = TextStyle(
-                                color = Color.Red,
-                                fontSize = 18.sp
-                            )
-                        )
-                    }
-                    is NetworkResponse.Loading -> {
-                        CircularProgressIndicator()
-                    }
-                    null -> {}
+                is NetworkResponse.Loading -> {
+                    CircularProgressIndicator()
                 }
-
-                Spacer(modifier = Modifier.height(16.dp))
+                null -> {}
             }
-        }
 
+            Spacer(modifier = Modifier.height(16.dp))
+        }
     }
 
 }
