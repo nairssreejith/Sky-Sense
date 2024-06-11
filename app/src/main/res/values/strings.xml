@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Sky Sense</string>
     <string name="title_activity_weather_app_main">WeatherAppMainActivity</string>
+    <string name="show_less">Show Less</string>
+    <string name="show_more">Show More</string>
+    <string name="weather_app_title">Weather App"</string>
+    <string name="weather_app_content_description"> This is a sample weather app that showcases the use of Retrofit, LiveData, and Jetpack Compose in fetching and displaying weather details of any city being searched. The app also incorporates AES algorithm based encryption for sensitive data. </string>
 </resources>

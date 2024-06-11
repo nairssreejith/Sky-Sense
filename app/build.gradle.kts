@@ -68,6 +68,13 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    // compose
+    implementation (libs.ui)
+    implementation (libs.material3)
+    implementation (libs.ui.tooling.preview)
+    implementation (libs.androidx.activity.compose.v131)
+    implementation (libs.androidx.foundation)
+
     // retrofit
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
@@ -81,4 +88,12 @@ dependencies {
     // List Navigation
     implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
     implementation(libs.androidx.compose.material3.adaptive.navigation)
+
+    // Shared Element Transition compose animation
+    implementation(libs.androidx.compose.animation)
+
+    // Room
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
 }

@@ -3,8 +3,8 @@ package com.sreejithsnair.skysense.model
 data class Current(
     val cloud: String,
     val condition: Condition,
-    val dewpoString_c: String,
-    val dewpoString_f: String,
+    val dewpoint_c: String,
+    val dewpoint_f: String,
     val feelslike_c: String,
     val feelslike_f: String,
     val gust_kph: String,

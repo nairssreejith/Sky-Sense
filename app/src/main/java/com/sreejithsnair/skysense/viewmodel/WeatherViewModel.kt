@@ -1,15 +1,16 @@
 package com.sreejithsnair.skysense.viewmodel
 
-import androidx.compose.ui.unit.Constraints
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sreejithsnair.skysense.model.Constants
+import com.sreejithsnair.skysense.utilities.Constants
 import com.sreejithsnair.skysense.model.WeatherModel
 import com.sreejithsnair.skysense.repository.NetworkResponse
 import com.sreejithsnair.skysense.repository.WeatherRepository
+import com.sreejithsnair.skysense.utilities.CryptoManager
 import kotlinx.coroutines.launch
+import java.io.File
 
 class WeatherViewModel: ViewModel() {
     private val weatherRepository = WeatherRepository.weatherApi
