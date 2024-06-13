@@ -69,14 +69,7 @@ fun WeatherPage(viewModel: WeatherViewModel){
             .fillMaxSize()
     ) {
         Spacer(modifier = Modifier.height(8.dp))
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.primary
-            ),
-            modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
-        ) {
-            GenericCardContent(weatherAppTitle, weatherAppDescription)
-        }
+        GenericCardContent(weatherAppTitle, weatherAppDescription)
 
         Column (
             modifier = Modifier
@@ -142,7 +135,9 @@ fun WeatherPage(viewModel: WeatherViewModel){
                     Text(text = result.errorMessage,
                         style = TextStyle(
                             color = Color.Red,
-                            fontSize = 18.sp
+                            fontFamily = Constants.customFontFamily,
+                            fontWeight = FontWeight.Medium,
+                            fontSize = 20.sp
                         )
                     )
                 }

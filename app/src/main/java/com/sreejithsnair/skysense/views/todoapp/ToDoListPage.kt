@@ -61,14 +61,8 @@ fun ToDoListPage(viewModel: ToDoViewModel){
             .padding(8.dp)
     ) {
         Spacer(modifier = Modifier.height(16.dp))
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.primary
-            ),
-            modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
-        ) {
-            GenericCardContent("ToDo App", Constants.taskMasterDescription)
-        }
+        GenericCardContent("ToDo App", Constants.taskMasterDescription)
+
         Spacer(modifier = Modifier.height(16.dp))
         Row(
             modifier = Modifier

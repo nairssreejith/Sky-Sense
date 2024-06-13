@@ -8,9 +8,14 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowDown
 import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -22,6 +27,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -34,49 +40,65 @@ fun GenericCardContent(title: String, content: String){
         mutableStateOf(false)
     }
 
-    Row(
-        modifier = Modifier
-            .padding(12.dp)
-            .animateContentSize(
-                animationSpec = spring(
-                    dampingRatio = Spring.DampingRatioMediumBouncy,
-                    stiffness = Spring.StiffnessLow
-                )
-            )
+    val scrollState = rememberScrollState()
+
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = colorResource(id = R.color.blue_grey_mid)
+        ),
+        modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
     ) {
-        Column(
+        Row(
             modifier = Modifier
-                .weight(1f)
                 .padding(12.dp)
+                .animateContentSize(
+                    animationSpec = spring(
+                        dampingRatio = Spring.DampingRatioMediumBouncy,
+                        stiffness = Spring.StiffnessLow
+                    )
+                )
         ) {
-            Text(
-                text = title,
-                fontFamily = Constants.customFontFamily,
-                style = MaterialTheme.typography.headlineMedium.copy(
-                    fontWeight = FontWeight.Bold
-                ),
-                color = Color.White
-            )
-            if(expanded){
-                Spacer(modifier = Modifier.height(24.dp))
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(12.dp)
+            ) {
                 Text(
-                    text = (content),
-                    color = Color.White,
+                    text = title,
                     fontFamily = Constants.customFontFamily,
-                    fontWeight = FontWeight.Normal
+                    style = MaterialTheme.typography.headlineMedium.copy(
+                        fontWeight = FontWeight.Bold
+                    ),
+                    color = Color.White
+                )
+                if(expanded){
+                    Spacer(modifier = Modifier.height(24.dp))
+                    Column (
+                        modifier = Modifier
+                            .wrapContentHeight()
+                            .verticalScroll(scrollState)
+                    ){
+
+                        Text(
+                            text = (content),
+                            color = Color.White,
+                            fontFamily = Constants.customFontFamily,
+                            fontWeight = FontWeight.Normal
+                        )
+                    }
+                }
+            }
+            IconButton(onClick = {expanded = !expanded}) {
+                Icon(
+                    imageVector = if(expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
+                    contentDescription = if(expanded){
+                        stringResource(R.string.show_less)
+                    } else {
+                        stringResource(R.string.show_more)
+                    },
+                    tint = Color.White
                 )
             }
         }
-        IconButton(onClick = {expanded = !expanded}) {
-            Icon(
-                imageVector = if(expanded) Icons.Filled.KeyboardArrowUp else Icons.Filled.KeyboardArrowDown,
-                contentDescription = if(expanded){
-                    stringResource(R.string.show_less)
-                } else {
-                    stringResource(R.string.show_more)
-                })
-
-        }
-
     }
 }

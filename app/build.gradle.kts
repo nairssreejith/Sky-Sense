@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-kapt")
+    id("kotlin-parcelize")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -102,4 +104,23 @@ dependencies {
 
     // SystemUiController
     implementation (libs.accompanist.systemuicontroller)
+
+    // Dagger Hilt
+    implementation (libs.hilt.android)
+    kapt (libs.hilt.compiler)
+
+    // Dagger Hilt - hiltViewModel()
+    implementation (libs.androidx.hilt.navigation.compose)
+
+    // material3
+    implementation (libs.material3)
+    implementation (libs.androidx.material3.window.size.ktx)
+
+    // Shared Element Transition compose animation
+    implementation (libs.accompanist.navigation.material)
+
+}
+
+kapt {
+    correctErrorTypes = true
 }
