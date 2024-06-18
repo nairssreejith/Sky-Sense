@@ -3,7 +3,9 @@ package com.sreejithsnair.skysense
 import android.app.Application
 import androidx.room.Room
 import com.sreejithsnair.skysense.database.tododatabase.ToDoDatabase
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class MainApplication: Application() {
     companion object{
        lateinit var toDoDatabase: ToDoDatabase

@@ -12,4 +12,7 @@
     <color name="blue_grey_light">#FF535E96</color>
     <color name="blue_grey_mid">#FF495D92</color>
     <color name="off_white">#FFDDDDDD</color>
+
+    <color name="dark_blue_bg">#0B1352</color>
+    <color name="light_blue_bg">#5F549C</color>
 </resources>

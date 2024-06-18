@@ -8,7 +8,9 @@ import com.sreejithsnair.skysense.utilities.Constants
 import com.sreejithsnair.skysense.data.WeatherModel
 import com.sreejithsnair.skysense.repository.NetworkResponse
 import com.sreejithsnair.skysense.repository.weather.WeatherRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+
 
 class WeatherViewModel: ViewModel() {
     private val weatherRepository = WeatherRepository.weatherApi

@@ -48,6 +48,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontStyle
@@ -66,9 +67,11 @@ import com.sreejithsnair.skysense.views.common.GenericCardContent
 import com.sreejithsnair.skysense.views.profile.ProfilePage
 import com.sreejithsnair.skysense.views.todoapp.ToDoListPage
 import com.sreejithsnair.skysense.views.weatherapp.WeatherPage
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.io.FileOutputStream
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -131,7 +134,7 @@ fun TitleCard(){
 
 @Composable
 fun ActivityBgImageSetter(){
-    val backgroundImage = painterResource(id = R.drawable.weather_app_bg)
+    val backgroundImage = painterResource(id = R.drawable.main_bg)
 
     Image(painter = backgroundImage,
         contentDescription = "background image",

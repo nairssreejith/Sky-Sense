@@ -129,6 +129,7 @@ fun WeatherPage(viewModel: WeatherViewModel){
 
             when(val result = weatherResult.value){
                 is NetworkResponse.Success -> {
+                    backgroundSetter(result.data.current.condition.text)
                     WeatherDetails(data = result.data)
                 }
                 is NetworkResponse.Error -> {
@@ -150,6 +151,12 @@ fun WeatherPage(viewModel: WeatherViewModel){
             Spacer(modifier = Modifier.height(16.dp))
         }
     }
+
+
+
+}
+
+fun backgroundSetter(weather: String){
 
 }
 
